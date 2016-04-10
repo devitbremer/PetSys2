@@ -42,96 +42,108 @@
 
             <!-- //////////////////////////////////////////////////////////////////////////// -->
 
-            <!-- INICIO DO CONTEUDO -->
+            <!-- INICIO DO CONTEUDO -->          
 
-            <!-- START CONTENT -->
-      <section id="content">
+            </form>-->
 
-        <!--start container-->
-        <div class="container">
-          <!--Formulário-->          
-          <div class="row">
-            <div class="col s12 m12 l12">
-              <div class="card-panel">
-                <h4 class="header2">CADASTRO DE CLIENTES</h4>
+            
+            <section id="content">
+
+              <!--start container-->
+              <div class="container">
+                <!--Formulário-->          
                 <div class="row">
-                  <form class="col s12">
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <input id="first_name" type="text">
-                        <label for="first_name">Nome</label>
-                      </div>
-                    
-                      <div class="input-field col s6">
-                        <input id="last_name" type="text">
-                        <label for="last_name">Last Name</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <input id="email5" type="email">
-                        <label for="email">Email</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <input id="password6" type="password">
-                        <label for="password">Password</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <select>
-                          <option value="" disabled selected>Choose your profile</option>
-                          <option value="1">Manager</option>
-                          <option value="2">Developer</option>
-                          <option value="3">Business</option>
-                        </select>
-                        <label>Select Profile</label>
-                      </div>                        
-                      <div class="input-field col s6">
-                        <input type="date" class="datepicker">
-                        <label for="dob">DOB</label>
-                      </div>
-                      
-                    </div>
-                    
-                    <div class="row">
-                      <div class="file-field input-field col s6">
-                        <input class="file-path validate" type="text"/>
-                        <div class="btn">
-                          <span>Age</span>
-                          <input type="file" />
-                        </div>
-                      </div>
-                      <div class="input-field col s6">                          
-                         <span>Image</span>
-                         <p class="range-field">
-                          <input type="range" id="test5" min="0" max="100" />
-                        </p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <textarea id="message5" class="materialize-textarea" length="120"></textarea>
-                        <label for="message">Message</label>
-                      </div>
+                  <div class="col s12 m12 l12">
+                    <div class="card-panel">
+                      <h4 class="header2">CADASTRO DE CLIENTES</h4>
                       <div class="row">
-                        <div class="input-field col s12">
-                          <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
-                            <i class="mdi-content-send right"></i>
-                          </button>
-                        </div>
+                        <form class="col s12">
+                          <div class="row">
+                            <div class="input-field col s4">
+                              <input name="nome_pessoa" id="nome_pessoa" type="text">
+                              <label for="nome_pessoa">Nome</label>
+                            </div>
+                            <div class="input-field col s3">
+                              <input name="CPF" id="CPF" type="text">
+                              <label for="CPF">CPF</label>
+                            </div>
+                            <div class="input-field col s2">
+                              <input type="date" class="datepicker">
+                              <label for="dob">Nasc.</label>
+                            </div>
+                            <div class="input-field col s3">
+                              <select>
+                                <option value="" disabled selected>Escolha o sexo</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Outros">Outros</option>
+                              </select>
+                              <label>Sexo</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s6">
+                              <input name="rua" id="rua" type="text">
+                              <label for="rua">Rua</label>
+                            </div>
+                            <div class="input-field col s3">
+                              <input name="numero_endereco" id="numero_endereco" type="text">
+                              <label for="numero_endereco">Numero</label>
+                            </div>
+                            <div class="input-field col s3">
+                              <input name="CEP" id="CEP" type="text">
+                              <label for="CEP">CEP</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s4">
+                              <input name="bairro" id="bairro" type="text">
+                              <label for="bairro">Bairro</label>
+                            </div>
+                            <div class="input-field col s4">
+                              <input name="cidade" id="cidade" type="text">
+                              <label for="cidade">Cidade</label>
+                            </div>
+                            <div class="input-field col s4">
+                              <select>
+                                <option value="" disabled selected>Escolha um estado</option>
+                                <option value="1">Paraná</option>
+                                <option value="2">Santa Catarina</option>
+                                <option value="3">Rio Grande do Sul</option>
+                              </select>
+                              <label>Estado</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s4">
+                              <select>
+                                <option value="" disabled selected>Escolha um tipo</option>
+                                <option value="1">Celular</option>
+                                <option value="2">Fixo</option>
+                              </select>
+                              <label>Tipo</label>
+                            </div>
+                            <div class="input-field col s4">
+                              <input name="bairro" id="bairro" type="text">
+                              <label for="bairro">Contato</label>
+                            </div>
+                          </div>                                                   
+                          <div class="row"><br>
+                            <div class="row">
+                              <div class="col s12 m8 l9">
+                                  <button class="btn waves-effect waves-light green" type="submit" name="Salvar" value="Salvar">Salvar</button>
+                                  <button class="btn waves-effect waves-light yellow darken-2" type="submit" name="Editar" value="Editar">Editar</button>
+                                  <button class="btn waves-effect waves-light red" type="submit" name="Excluir" value="Excluir">Excluir</button>
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-      </div>
-  </section>
-  <!-- END CONTENT -->
+            </section>
+            <!-- END CONTENT -->
 
             
             <!-- FIM DO CONTEUDO -->

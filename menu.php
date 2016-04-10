@@ -31,7 +31,7 @@
 	            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-insert-comment"></i> Cadastros</a>
 	                <div class="collapsible-body">
 	                    <ul>
-	                        <li><a href="#">Clientes</a>
+	                        <li><a href="clientes.php">Clientes</a>
 	                        </li>
 	                        <li><a href="produtos.php">Produtos</a>
 	                        </li>
