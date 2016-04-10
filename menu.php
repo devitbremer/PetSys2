@@ -35,9 +35,9 @@
 	                        </li>
 	                        <li><a href="produtos.php">Produtos</a>
 	                        </li>
-	                        <li><a href="#">Pets</a>
+	                        <li><a href="pets.php">Pets</a>
 	                        </li>
-	                        <li><a href="#">Serviços</a>
+	                        <li><a href="servicos.php">Serviços</a>
 	                        </li>
 	                    </ul>
 	                </div>
