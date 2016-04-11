@@ -12,13 +12,13 @@
 </head>
 
 <body>
-    <!-- Start Page Loading -->
+    <!-- Start Page Loading 
     <div id="loader-wrapper">
         <div id="loader"></div>        
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
-    <!-- End Page Loading -->
+    End Page Loading -->
 
     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
@@ -46,13 +46,9 @@
             <?php
                 include("connect.php");
 
-                //Carregando selects
-                $query_carrega_select_tipo_animal = mysql_query("SELECT  id_tipo_animal,tipo_animal_nome FROM tipo_animal");
-                $query_carrega_select_tutor =  mysql_query("SELECT  id_cliente,nome FROM cliente");
-
-
+               
                 //Carregando variaveis
-                @$nome_pet = $_POST['nome_pet'];
+                @$nome_pet = $_POST['pet_nome'];
                 @$nascimento = $_POST['nascimento'];
                 @$sexo = $_POST['sexo'];
                 @$tipo = $_POST['tipo'];
@@ -60,46 +56,86 @@
                 @$peso = $_POST['peso'];
                 @$id_tutor = $_POST['id_tutor'];
 
+                //Selecionando Selects
+                function selected( $value, $selected ){
+                  return $value==$selected ? ' selected="selected"' : '';
+                }
+
                 //Salvando
+                @$petid = $_GET['idpet'];
+
                 if(isset($_POST['Salvar'])){
-                  $query = "INSERT INTO animal(nome, nascimento, id_tipo, raca, peso,id_tutor,sexo) VALUES ('$nome_pet','$nascimento',$tipo','$raca','$peso','$id_tutor',$sexo)";
-                  $inserir = mysql_query($query);
-                  if ($inserir) {echo "Cadastrado com sucesso!";} 
-                  else {
+
+                  //$recebe_get = trim($_GET['idpet']);
+                  //echo '<script type="text/javascript">alert(">'.var_dump($recebe_get).'<");</script>';
+                  if(trim($_GET['idpet']) != ''){ echo '<script type="text/javascript">alert("Estou Atualizando!");</script>';
+                    $query = "UPDATE animal SET nome = '$nome_pet',
+                                                    nascimento = '$nascimento',
+                                                    id_tipo = '$tipo',
+                                                    raca = '$raca',
+                                                    peso = '$peso',
+                                                    id_tutor = '$id_tutor',
+                                                    sexo = '$sexo'
+                              WHERE id_animal = '$petid'";
+                  }
+                  else{ echo '<script type="text/javascript">alert("Estou inserindo!");</script>';
+                  $query = "INSERT INTO animal(nome, nascimento, id_tipo, raca, peso, id_tutor, sexo) VALUES ('$nome_pet','$nascimento','$tipo','$raca','$peso', '$id_tutor', '$sexo' )";
+                  }
+
+
+                  $executar = mysql_query($query);
+                  if ($executar) {
+                  echo '<script type="text/javascript">alert("Salvo!");</script>';
+                  } else {
                   echo "Não foi possível inserir, tente novamente.";
                   echo "Dados sobre o erro:" . mysql_error();
                   }
-                }
+                 } 
+                   $pesquisa_pet = "SELECT a.id_animal as id_pet,
+                                                        a.nome as nome_pet,
+                                                        a.id_tutor as id_tutor,
+                                                        a.id_tipo as id_tipo,
+                                                        tp.tipo_animal_nome as nome_tipo,
+                                                        a.nascimento as nascimento,
+                                                        a.peso as peso,
+                                                        a.raca as raca,
+                                                        c.nome as nome_tutor,
+                                                        a.sexo as sexo
+                                      FROM animal as a 
+                                      INNER JOIN cliente AS c 
+                                      ON c.id_cliente=a.id_tutor
+                                      INNER JOIN tipo_animal as tp
+                                      on tp.id_tipo_animal=a.id_tipo
+                                      WHERE a.id_animal = '$petid'"; 
+                  $result = mysql_query($pesquisa_pet) or die(mysql_error());
+                  $linha = mysql_fetch_assoc($result);
             ?>         
-
             </form>
-
-            
             <section id="content">
-
               <!--start container-->
               <div class="container">
                 <!--Formulário-->          
                 <div class="row">
                   <div class="col s12 m12 l12">
                     <div class="card-panel">
-                      <h4 class="header2">CADASTRO DE PETS</h4>
+                      <h4 class="header2">MANUTENçÃO DE PETS</h4>
                       <div class="row">
-                        <form class="col s12">
+                        <form action="pets.php?idpet=<?php echo $linha['id_pet'];?>" method="POST" class="col s12">
                           <div class="row">
                             <div class="input-field col s6">
-                              <input name="nome_pet" id="nome_pet" type="text">
-                              <label for="nome_pet">Nome</label>
+                              <input value="<?php echo $linha['nome_pet']; ?>" name="pet_nome" id="pet_nome" type="text" >
+                              <input type="hidden" name="id_pet" value="<?php echo $linha['id_pet'] ?>">
+                              <label <?php if(isset($linha['nome_pet']))echo 'class="active"' ?> for="nome_pet">Nome</label>
                             </div>
                             <div class="input-field col s3">
-                              <input name="nascimento" type="date" class="datepicker">
-                              <label for="nascimento">Nasc.</label>
+                              <input value="<?php echo $linha['nascimento']; ?>" name="nascimento" type="date" class="datepicker" >
+                              <label <?php if(isset($linha['nascimento']))echo 'class="active"' ?> for="nascimento">Nasc.</label>
                             </div>
                             <div class="input-field col s3">
                               <select name="sexo">
                                 <option value="" disabled selected>Escolha o sexo</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Feminino">Feminino</option>
+                                <option <?php echo selected('Masculino',$linha['sexo']); ?> value="Masculino">Masculino</option>
+                                <option <?php echo selected('Feminino',$linha['sexo']);?>value="Feminino">Feminino</option>
                               </select>
                               <label>Sexo</label>
                             </div>
@@ -108,48 +144,48 @@
                             <div class="input-field col s6">
                               <select name ="tipo">
                                 <option value="" disabled selected>Escolha o tipo</option>
-                                <?php while($tp = mysql_fetch_array($query_carrega_select_tipo_animal)) { ?>
-                                <option value="<?php echo $tp['id_tipo_animal'] ?>"><?php echo $tp['tipo_animal_nome'] ?></option>
-                                <?php } ?>
+                                <option <?php echo selected('1',$linha['id_tipo']); ?> value="1">Cães</option>
+                                <option <?php echo selected('2',$linha['id_tipo']);?>value="2">Gatos</option>
+                                <option <?php echo selected('3',$linha['id_tipo']);?>value="3">Aves</option>
+                                <option <?php echo selected('4',$linha['id_tipo']);?>value="4">Peixes</option>
                               </select>
                               <label>Tipo</label>
                             </div>
                             <div class="input-field col s3">
-                              <input name="raca" id="raca" type="text">
-                              <label for="raca">Raça</label>
+                              <input value="<?php echo $linha['raca']; ?>" name="raca" id="raca" type="text">
+                              <label <?php if(isset($linha['raca']))echo 'class="active"' ?> for="raca">Raça</label>
                             </div>
                             <div class="input-field col s3">
-                              <input name="peso" id="peso" type="text">
-                              <label for="peso">Peso</label>
+                              <input value="<?php echo $linha['peso']; ?>" name="peso" id="peso" type="text">
+                              <label <?php if(isset($linha['peso']))echo 'class="active"' ?> for="peso">Peso</label>
                             </div>
                           </div>
                           <div class="row">
-                            <div class="input-field col s12">
-                              <select name = "id_tutor">
-                                <option value="" disabled selected>Selecione o Tutor</option>
-                                <?php while($tt = mysql_fetch_array($query_carrega_select_tutor)) { ?>
-                                <option value="<?php echo $tt['id_cliente'] ?>"><?php echo $tt['nome'] ?></option>
-                                <?php } ?>
-                              </select>
-                              <label>Tutor</label>
-                            </div> 
+                            <div class="input-field col s3">
+                              <input value="<?php echo $linha['id_tutor']; ?>" name="id_tutor" id="id_tutor" type="text">
+                              <label <?php if(isset($linha['id_tutor']))echo 'class="active"' ?>>Id</label>
+                            </div>
+                            <div class="input-field col s9 disabled">
+                              <input disabled value="<?php echo $linha['nome_tutor']; ?>" name="nome_tutor" id="nome_tutor" type="text">
+                              <label <?php if(isset($linha['nome_tutor']))echo 'class="active"' ?>>Tutor</label>
+                            </div>
                           </div>                                                 
                           <div class="row"><br>
                             <div class="row">
                               <div class="col s12 m8 l9">
                                   <button class="btn waves-effect waves-light green" type="submit" name="Salvar" value="Salvar">Salvar</button>
-                                  <button class="btn waves-effect waves-light yellow darken-2" type="submit" name="Editar" value="Editar">Editar</button>
-                                  <button class="btn waves-effect waves-light red" type="submit" name="Excluir" value="Excluir">Excluir</button>
+                                  <a href="petlst.php" class="btn waves-effect waves-light blue"  name="Pesquisar" value="Salvar">Pesquisar</a>
+                              </div>
                             </div>
                           </div>
                         </form>
                       </div>
                     </div>
                   </div>
+                  </div>
                 </div>
               </div>
             </section>
-            <!-- END CONTENT -->
 
             
             <!-- FIM DO CONTEUDO -->
