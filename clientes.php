@@ -5,7 +5,7 @@ session_start();
 include("connect.php");
 
     
-
+@$id_pessoa;
 @$nome_pessoa = $_POST['nome_pessoa'];
 @$cpf = $_POST['CPF'];
 @$data_nascimento = $_POST['data_nascimento'];
@@ -19,41 +19,35 @@ include("connect.php");
 @$numero_contato = $_POST['numero_contato'];
 @$tipo = $_POST['tipo'];
 
-echo ("$genero");
+
 function selected( $value, $selected ){
     return $value==$selected ? ' selected="selected"' : '';
 }
 
-if(isset($_POST['Salvar'])){
+if(isset($_POST['Salvar']) && !empty($cpf)){
 	//INSERT endereco//
 	$query_valida = "SELECT * FROM cliente WHERE cpf = $cpf";
 	$sqlcheckn = mysql_query($query_valida);
-	@$row = mysql_fetch_assoc($sqlcheckn);
 	$rowsn = mysql_num_rows($sqlcheckn);
-	foreach( $row as $key => $value )
-			{
-				$_POST[$key] = $value;
-			}
-		@$id_contato = $value;
 	if ($rowsn == 0) {
 		
 		$query_endereco = "INSERT INTO endereco(nome_rua, numero, bairro, cidade, estado, cep) 
 						VALUES ('$rua','$numero_endereco','$bairro','$cidade','$estado','$CEP')";
-	$inserir_endereco = mysql_query($query_endereco);
-	if ($inserir_endereco) {
-		echo "endereco cadastrado com sucesso!";
-			$query_sel_endereco = "SELECT MAX(id_endereco) FROM endereco";
-	
-			$selecionar_id_end = mysql_query($query_sel_endereco);
-			@$row_end = mysql_fetch_assoc($selecionar_id_end);
-			foreach( $row_end as $key => $value )
-			{
-				$_POST[$key] = $value;
-			}
-			 $id_endereco = $value;
-		} else {
-			echo "endereco nao cadastrado!";
-		}
+		$inserir_endereco = mysql_query($query_endereco);
+			if ($inserir_endereco) {
+				echo "endereco cadastrado com sucesso!";
+					$query_sel_endereco = "SELECT MAX(id_endereco) FROM endereco";
+			
+					$selecionar_id_end = mysql_query($query_sel_endereco);
+					@$row_end = mysql_fetch_assoc($selecionar_id_end);
+					foreach( $row_end as $key => $value )
+					{
+						$_POST[$key] = $value;
+					}
+					 $id_endereco = $value;
+				} else {
+					echo "endereco nao cadastrado!";
+				}	
 		//INSERT contato//
 	$query_contato = "INSERT INTO contato(tipo, telefone) VALUES ('$tipo','$numero_contato')";
 	$inserir_contato = mysql_query($query_contato);
@@ -72,6 +66,7 @@ if(isset($_POST['Salvar'])){
 	} else {
 	}
 	//INSERT Pessoa//
+	
 	$query_pessoa = "INSERT INTO cliente (nome, cpf, nasc_data, id_endereco, id_contato, sexo) 
 						VALUES ('$nome_pessoa', '$cpf', '$data_nascimento', '$id_endereco', '$id_contato', '$genero')";
 	$inserir_pessoa = mysql_query($query_pessoa);
@@ -81,30 +76,41 @@ if(isset($_POST['Salvar'])){
 	echo "Não foi possível inserir, tente novamente.";
 	echo "Dados sobre o erro:" . mysql_error();
 	}
-	
-	@$nome_pessoa = null;
-	@$cpf = null;	
-	@$data_nascimento = null;
-	@$genero = null;
-	@$rua = null;
-	@$numero_endereco = null;
-	@$bairro = null;
-	@$cidade = null;
-	@$estado = null;
-	@$CEP = null;
-	@$numero_contato = null;
-	@$tipo = null;
 		
 	}else{
-		$result_update_contato = mysql_query("UPDATE contato 
-								SET tipo=$tipo,telefone= $numero_contato
-								WHERE $id_contato");
-		$result_update_endereco = mysql_query("UPDATE endereco 
-								SET nome_rua=$rua,numero=$numero_endereco,bairro=$bairro,cidade=$cidade,estado=$estado,cep=$CEP 
-								WHERE id_endereco");
-		$result_update_cliente = mysql_query("UPDATE cliente 
-								SET nome=$nome_pessoa,cpf=$cpf,nasc_data=$data_nascimento,id_endereco=$id_endereco,id_contato= $id_contato,sexo= $genero
-								WHERE $id_cliente");
+		
+		@$query_valida = "SELECT * FROM cliente WHERE cpf = $cpf";
+		@$row = mysql_fetch_assoc($sqlcheckn);
+		foreach( $row as $key => $value )
+			{
+				$_POST[$key] = $value;
+			}
+		@$id_contato = $_POST['id_contato'];
+		@$id_endereco = $_POST['id_endereco'];
+		@$id_cliente = $_POST['id_cliente'];
+		@$nome_pessoa = $_POST['nome_pessoa'];
+		@$cpf = $_POST['CPF'];
+		@$data_nascimento = $_POST['data_nascimento'];
+		@$genero = $_POST['genero'];
+		@$rua = $_POST['rua'];
+		@$numero_endereco = $_POST['numero_endereco'];
+		@$bairro = $_POST['bairro'];
+		@$cidade = $_POST['cidade'];
+		@$estado = $_POST['estado'];
+		@$CEP = $_POST['CEP'];
+		@$numero_contato = $_POST['numero_contato'];
+		@$tipo = $_POST['tipo'];
+		echo ("contato : $id_contato");
+		echo ("cliente : $id_cliente");
+		echo ("endereco : $id_endereco");
+		
+		$query_update_contato = ("UPDATE contato SET tipo='$tipo',telefone= '$numero_contato' WHERE id_contato =$id_contato");
+		$query_update_endereco = ("UPDATE endereco SET nome_rua='$rua',numero='$numero_endereco',bairro='$bairro',cidade='$cidade',estado='$estado',cep ='$CEP' WHERE id_endereco = $id_endereco");
+		$query_update_cliente = ("UPDATE cliente SET nome='$nome_pessoa',cpf='$cpf',nasc_data='$data_nascimento',id_endereco='$id_endereco',id_contato= '$id_contato',sexo= '$genero' WHERE id_cliente = $id_cliente");
+		echo ("query_update_cliente");
+		$result_update_contato = mysql_query($query_update_contato);
+		$result_update_endereco = mysql_query($query_update_endereco);
+		$result_update_cliente = mysql_query($query_update_cliente);
 
 								
 		
@@ -115,7 +121,7 @@ if(isset($_POST['Salvar'])){
  }
 
 
-if(isset($_POST['Editar'])){
+if(isset($_POST['Editar']) && !empty($cpf)){
 	
 	
 	
@@ -126,6 +132,7 @@ if(isset($_POST['Editar'])){
 	{
 		$_POST[$key] = $value;
 	}
+	$id_pessoa = $row['id_cliente'];
 	$id_endereco = $row['id_endereco'];
 	
 	$id_contato = $row['id_contato'];
@@ -146,7 +153,7 @@ if(isset($_POST['Editar'])){
 		$_POST[$key] = $value;
 	}
 	
-	
+	@$id_cliente = $_POST['id_cliente'];
 	@$nome_pessoa = $_POST['nome'];
 	@$cpf = $_POST['cpf'];	
 	@$data_nascimento = $_POST['nasc_data'];
@@ -166,7 +173,7 @@ if(isset($_POST['Editar'])){
 	
 }
 
-if(isset($_POST['Excluir'])){
+if(isset($_POST['Excluir']) && !empty($cpf)){
 	
 	
 	$id_contato = $_SESSION['id_contato'];
@@ -179,18 +186,17 @@ if(isset($_POST['Excluir'])){
 	
 	$result_excluir_contato = mysql_query($query_contato);
 		
-		if ($result_excluir_contato) echo "<h2> contato excluido com sucesso!!!</h2>";
-		else echo "<h2> Nao consegui excluir!!!</h2>";
+		if ($result_excluir_contato) echo " contato excluido com sucesso!!!";
+		else echo "Nao consegui excluir!!!";
 		
 	$result_excluir_endereco = mysql_query($query_endereco);
 		
-		if ($result_excluir_endereco) echo "<h2> endereco excluido com sucesso!!!</h2>";
-		else echo "<h2> Nao consegui excluir!!!</h2>";
+		if ($result_excluir_endereco) echo "endereco excluido com sucesso!!!";
+		else echo " Nao consegui excluir!!!";
 		
 	$result_excluir_pessoa = mysql_query($query_pessoa);
-		
-		if ($result_excluir_endereco) echo "<h2> pessoa excluido com sucesso!!!</h2>";
-		else echo "<h2> Nao consegui excluir!!!</h2>";	
+		if ($result_excluir_endereco) echo "pessoa excluido com sucesso!!!";
+		else echo " Nao consegui excluir!!!";
 }
 
 ?>
@@ -241,7 +247,7 @@ if(isset($_POST['Excluir'])){
 
             <!-- INICIO DO CONTEUDO -->          
 
-            </form>-->
+            </form>
 
             
             <section id="content">
@@ -256,7 +262,7 @@ if(isset($_POST['Excluir'])){
                       <div class="row">
                         <form class="col s12" action=# method=POST>
                           <div class="row">
-                            <div class="input-field col s4">
+						    <div class="input-field col s4">
                               <input name="nome_pessoa" id="nome_pessoa" type="text" value="<?php echo @$nome_pessoa; ?>">
                               <label for="nome_pessoa">Nome</label>
 							</div>
@@ -265,10 +271,10 @@ if(isset($_POST['Excluir'])){
                               <label for="CPF">CPF</label>
                             </div>
                             <div class="input-field col s2">
-                              <input type="date" class="datepicker" name="data_nascimento" value="<?php echo @$data_nascimento; ?>>
+                              <input type="date" class="datepicker" name="data_nascimento" value="<?php echo @$data_nascimento; ?>">
                               <label for="dob">Nasc.</label>
                             </div>
-                            <div class="input-field col s3">
+                            <div class="input-field col s2">
                               <select name="genero">
                                 <option value="" disabled selected>Escolha o sexo</option>
                                 <option value="Masculino" <?php echo selected( 'Masculino', $genero ); ?>>Masculino</option>
