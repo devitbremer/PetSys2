@@ -134,8 +134,8 @@
                             <div class="input-field col s3">
                               <select name="sexo">
                                 <option value="" disabled selected>Escolha o sexo</option>
-                                <option <?php echo selected('Masculino',$linha['sexo']); ?> value="Masculino">Masculino</option>
-                                <option <?php echo selected('Feminino',$linha['sexo']);?>value="Feminino">Feminino</option>
+                                <option <?php echo selected('Macho',$linha['sexo']); ?> value="Macho">Masculino</option>
+                                <option <?php echo selected('Fêmea',$linha['sexo']);?>value="Fêmea">Feminino</option>
                               </select>
                               <label>Sexo</label>
                             </div>

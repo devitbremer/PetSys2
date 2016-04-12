@@ -264,15 +264,15 @@ if(isset($_POST['Excluir']) && !empty($cpf)){
                           <div class="row">
 						    <div class="input-field col s4">
                               <input name="nome_pessoa" id="nome_pessoa" type="text" value="<?php echo @$nome_pessoa; ?>">
-                              <label for="nome_pessoa">Nome</label>
+                              <label <?php if(isset($nome_pessoa))echo 'class="active"' ?> for="nome_pessoa">Nome</label>
 							</div>
                             <div class="input-field col s3">
                               <input name="CPF" id="CPF" type="text" value="<?php echo @$cpf; ?>">
-                              <label for="CPF">CPF</label>
+                              <label <?php if(isset($cpf))echo 'class="active"' ?> for="CPF">CPF</label>
                             </div>
                             <div class="input-field col s2">
                               <input type="date" class="datepicker" name="data_nascimento" value="<?php echo @$data_nascimento; ?>">
-                              <label for="dob">Nasc.</label>
+                              <label <?php if(isset($data_nascimento))echo 'class="active"' ?> for="dob">Nasc.</label>
                             </div>
                             <div class="input-field col s2">
                               <select name="genero">
@@ -280,7 +280,6 @@ if(isset($_POST['Excluir']) && !empty($cpf)){
                                 <option value="Masculino" <?php echo selected( 'Masculino', $genero ); ?>>Masculino</option>
                                 <option value="Feminino" <?php echo selected( 'Feminino', $genero ); ?>>Feminino</option>
                                 <option value="Outros" <?php echo selected( 'Outros', $genero ); ?>>Outros</option>
-								
                               </select>
                               <label>Sexo</label>
                             </div>
@@ -288,25 +287,25 @@ if(isset($_POST['Excluir']) && !empty($cpf)){
                           <div class="row">
                             <div class="input-field col s6">
                               <input name="rua" id="rua" type="text" value="<?php echo @$rua; ?>">
-                              <label for="rua">Rua</label>
+                              <label<?php if(isset($rua))echo 'class="active"' ?> for="rua">Rua</label>
                             </div>
                             <div class="input-field col s3">
                               <input name="numero_endereco" id="numero_endereco" type="text" value="<?php echo @$numero_endereco; ?>">
-                              <label for="numero_endereco">Numero</label>
+                              <label <?php if(isset($numero_endereco))echo 'class="active"' ?> for="numero_endereco">Numero</label>
                             </div>
                             <div class="input-field col s3">
                               <input name="CEP" id="CEP" type="text" value="<?php echo @$CEP; ?>">
-                              <label for="CEP">CEP</label>
+                              <label <?php if(isset($CEP))echo 'class="active"' ?> for="CEP">CEP</label>
                             </div>
                           </div>
                           <div class="row">
                             <div class="input-field col s4">
                               <input name="bairro" id="bairro" type="text" value="<?php echo @$bairro; ?>">
-                              <label for="bairro">Bairro</label>
+                              <label <?php if(isset($bairro))echo 'class="active"' ?> for="bairro">Bairro</label>
                             </div>
                             <div class="input-field col s4">
                               <input name="cidade" id="cidade" type="text" value="<?php echo @$cidade; ?>">
-                              <label for="cidade">Cidade</label>
+                              <label <?php if(isset($cidade))echo 'class="active"' ?> for="cidade">Cidade</label>
                             </div>
                             <div class="input-field col s4">
                               <select name="estado">
@@ -346,14 +345,14 @@ if(isset($_POST['Excluir']) && !empty($cpf)){
                             <div class="input-field col s4">
                               <select name="tipo">
                                 <option value="" disabled selected>Escolha um tipo</option>
-                                <option value="Celular" <?php echo selected( 'Celular', $tipo ); ?>>Celular</option>
-                                <option value="Fixo" <?php echo selected( 'Fixo', $tipo ); ?>>Fixo</option>
+                                <option value="2" <?php echo selected( '2', $tipo ); ?>>Celular</option>
+                                <option value="1" <?php echo selected( '1', $tipo ); ?>>Fixo</option>
                               </select>
                               <label>Tipo</label>
                             </div>
                             <div class="input-field col s4">
                               <input name="numero_contato" id="numero_contato" type="text" value="<?php echo @$numero_contato; ?>">
-                              <label for="numero_contato">Contato</label>
+                              <label <?php if(isset($numero_contato))echo 'class="active"' ?> for="numero_contato">Contato</label>
                             </div>
                           </div>                                                   
                           <div class="row"><br>
