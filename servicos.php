@@ -119,12 +119,14 @@
                         <h4 class="header2">CADASTRO DE SERVIÇOS</h4>
                         <div class="row">
                           <form action=# method=POST class="col s12">
+                            <div class="row card-panel z-depth-2">
                             <div class="row">
                               <div class="input-field col s12">
                                 <input value="<?php echo @$nome_servico;?>" name="nome_servico" id="nome_servico" type="text">
                                 <label for="nome_servico">Serviço</label>
                               </div>
                             </div>
+                            <div class="row">
                               <div class="input-field col s6">
                                 <input value="<?php echo @$codigo_barra;?>" name="codigo_barra" id="codigo_barra" type="text">
                                 <label for="codigo_barra">Código de Barras</label>
@@ -134,8 +136,8 @@
                                 <label for="preco">Preço</label>
                               </div>
                             </div>                    
-                           
-                            <div class="row"><br>
+                           </div>
+                            <div class="row card-panel">
                               <div class="row">
                                 <div class="col s12 m8 l9">
                                   <button class="btn waves-effect waves-light green" type="submit" name="Salvar" value="Salvar">Salvar</button>

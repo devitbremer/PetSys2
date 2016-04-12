@@ -261,6 +261,8 @@ if(isset($_POST['Excluir']) && !empty($cpf)){
                       <h4 class="header2">CADASTRO DE CLIENTES</h4>
                       <div class="row">
                         <form class="col s12" action=# method=POST>
+                        <div class="row card-panel z-depth-2">
+                        <h4 class="header2">IDENTIFICAÇÃO</h4>	
                           <div class="row">
 						    <div class="input-field col s4">
                               <input name="nome_pessoa" id="nome_pessoa" type="text" value="<?php echo @$nome_pessoa; ?>">
@@ -284,6 +286,9 @@ if(isset($_POST['Excluir']) && !empty($cpf)){
                               <label>Sexo</label>
                             </div>
                           </div>
+                          </div>
+                          <div class="row card-panel z-depth-2">
+                          <h4 class="header2">ENDEREÇO</h4>
                           <div class="row">
                             <div class="input-field col s6">
                               <input name="rua" id="rua" type="text" value="<?php echo @$rua; ?>">
@@ -341,6 +346,9 @@ if(isset($_POST['Excluir']) && !empty($cpf)){
                               <label>Estado</label>
                             </div>
                           </div>
+                      	</div>
+                      	<div class="row card-panel z-depth-2">
+                      	<h4 class="header2">CONTATO</h4>	
                           <div class="row">
                             <div class="input-field col s4">
                               <select name="tipo">
@@ -354,14 +362,18 @@ if(isset($_POST['Excluir']) && !empty($cpf)){
                               <input name="numero_contato" id="numero_contato" type="text" value="<?php echo @$numero_contato; ?>">
                               <label <?php if(isset($numero_contato))echo 'class="active"' ?> for="numero_contato">Contato</label>
                             </div>
-                          </div>                                                   
-                          <div class="row"><br>
+                          </div>
+                          </div>
+                          <div class="row card-panel">                                                   
+                          <div class="row">
                             <div class="row">
                               <div class="col s12 m8 l9">
                                   <button class="btn waves-effect waves-light green" type="submit" name="Salvar" value="Salvar">Salvar</button>
                                   <button class="btn waves-effect waves-light yellow darken-2" type="submit" name="Editar" value="Editar">Editar</button>
                                   <button class="btn waves-effect waves-light red" type="submit" name="Excluir" value="Excluir">Excluir</button>
                             </div>
+                          </div>
+                          </div>
                           </div>
                         </form>
                       </div>
