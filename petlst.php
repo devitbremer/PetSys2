@@ -106,7 +106,7 @@
                           </div>
                           <div class="row" id="table">
                             <div class="col s12 m12 l12">
-                              <table class="hoverable">
+                              <table class="hoverable striped">
                                 <thead>
                                   <tr>
                                     <th data-field="id">Id</th>

@@ -97,12 +97,11 @@
                             </div>
                             <div class="input-field col s4">
                               <div class="input-field col s12">
-                                <button onclick='adiciona()' class="btn cyan waves-effect waves-light" type="submit" name="Pesquisar"><i class="mdi-action-search"></i> PESQUISAR</button>
+                                <button class="btn cyan waves-effect waves-light" type="submit" name="Pesquisar"><i class="mdi-action-search"></i> PESQUISAR</button>
                               </div>
-                            </div><br>
+                            </div>
                           </div>
-                          <div class="divider">
-                          </div>
+                          <div class="row card-panel z-depth-2">
                           <div class="row" id="table">
                             <div class="col s12 m12 l12">
                               <table class="hoverable" id="tabela">
@@ -111,7 +110,6 @@
                                     <th data-field="id">Item</th>
                                     <th data-field="nome">Nome</th>
                                     <th data-field="preco">Valor</th>
-                                    <th data-field="total">Total</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -129,6 +127,7 @@
                                       if(isset($_POST['Pesquisar'])){
                                         $result = mysql_query($pesquisa);
                                         while($dados = mysql_fetch_array($result)){
+                                          @$total=$total+$dados['preco'];
                                           echo '<tr>';
                                             echo '<td>';
                                               echo $dados['id_produto'];
@@ -139,9 +138,6 @@
                                             echo '<td>';
                                               echo $dados['preco'];
                                             echo '</td>';
-                                            echo '<td>';
-                                              echo @$soma_preco = $dados['preco']+$soma_preco;
-                                            echo '</td>';
                                           echo '</tr>';
                                           
                                         }                                       
@@ -150,15 +146,18 @@
                                 </tbody>
                               </table>
                             </div>
-                            <div class="row">
-                            	<div class="input-field col s4">
-                              		<div class="input-field col s12">
-                                		<button class="btn green waves-effect waves-light" type="submit" name="Salvar"><i class="mdi-action-save"></i> Salvar</button>
-                              		</div>
-                            	</div>
                             </div>
                           </div>
                       </form>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s4">
+                        <button class="btn green waves-effect waves-light" type="submit" name="Salvar"><i class="mdi-action-save"></i> Salvar</button>
+                      </div>
+                      <div class="input-field col s4"></div>
+                      <div class="input-field col s4">
+                        <?php echo 'TOTAL R$:'.@$total; ?>
+                      </div>
                     </div>
                   </div>
                 </div>

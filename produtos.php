@@ -119,6 +119,7 @@
                         <h4 class="header2">CADASTRO DE Produtos</h4>
                         <div class="row">
                           <form action=# method=POST class="col s12">
+                          <div class="row card-panel z-depth-2">
                             <div class="row">
                               <div class="input-field col s12">
                                 <input value="<?php echo @$nome_produto;?>" name="nome_produto" id="nome_produto" type="text">
@@ -139,8 +140,8 @@
                                 <label for="preco">Preço</label>
                               </div>
                             </div>                    
-                           
-                            <div class="row"><br>
+                           </div>
+                            <div class="row card-panel">
                               <div class="row">
                                 <div class="col s12 m8 l9">
                                   <button class="btn waves-effect waves-light green" type="submit" name="Salvar" value="Salvar">Salvar</button>
