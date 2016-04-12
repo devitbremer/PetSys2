@@ -66,9 +66,8 @@
 
                 if(isset($_POST['Salvar'])){
 
-                  //$recebe_get = trim($_GET['idpet']);
-                  //echo '<script type="text/javascript">alert(">'.var_dump($recebe_get).'<");</script>';
-                  if(trim($_GET['idpet']) != ''){ echo '<script type="text/javascript">alert("Estou Atualizando!");</script>';
+                  
+                  if(trim($_GET['idpet']) != ''){ 
                     $query = "UPDATE animal SET nome = '$nome_pet',
                                                     nascimento = '$nascimento',
                                                     id_tipo = '$tipo',
@@ -78,14 +77,15 @@
                                                     sexo = '$sexo'
                               WHERE id_animal = '$petid'";
                   }
-                  else{ echo '<script type="text/javascript">alert("Estou inserindo!");</script>';
+                  else{ 
                   $query = "INSERT INTO animal(nome, nascimento, id_tipo, raca, peso, id_tutor, sexo) VALUES ('$nome_pet','$nascimento','$tipo','$raca','$peso', '$id_tutor', '$sexo' )";
                   }
 
 
                   $executar = mysql_query($query);
                   if ($executar) {
-                  echo '<script type="text/javascript">alert("Salvo!");</script>';
+                  //echo '<script type="text/javascript">Materialize.toast("salvo!")</script>';
+                    echo '<script type="text/javascript">alert("salvo!")</script>';
                   } else {
                   echo "Não foi possível inserir, tente novamente.";
                   echo "Dados sobre o erro:" . mysql_error();
@@ -121,6 +121,7 @@
                       <h4 class="header2">MANUTENçÃO DE PETS</h4>
                       <div class="row">
                         <form action="pets.php?idpet=<?php echo $linha['id_pet'];?>" method="POST" class="col s12">
+                          <div class="card-panel z-depth-2">
                           <div class="row">
                             <div class="input-field col s6">
                               <input value="<?php echo $linha['nome_pet']; ?>" name="pet_nome" id="pet_nome" type="text" >
@@ -133,11 +134,11 @@
                             </div>
                             <div class="input-field col s3">
                               <select name="sexo">
-                                <option value="" disabled selected>Escolha o sexo</option>
-                                <option <?php echo selected('Macho',$linha['sexo']); ?> value="Macho">Masculino</option>
-                                <option <?php echo selected('Fêmea',$linha['sexo']);?>value="Fêmea">Feminino</option>
+                                <option value="" disabled selected>Escolha o genero</option>
+                                <option <?php echo selected('Macho',$linha['sexo']); ?> value="Macho">Macho</option>
+                                <option <?php echo selected('Fêmea',$linha['sexo']);?>value="Fêmea">Fêmea</option>
                               </select>
-                              <label>Sexo</label>
+                              <label>Genero</label>
                             </div>
                           </div>
                           <div class="row">
@@ -169,7 +170,8 @@
                               <input disabled value="<?php echo $linha['nome_tutor']; ?>" name="nome_tutor" id="nome_tutor" type="text">
                               <label <?php if(isset($linha['nome_tutor']))echo 'class="active"' ?>>Tutor</label>
                             </div>
-                          </div>                                                 
+                          </div>
+                          </div>
                           <div class="row"><br>
                             <div class="row">
                               <div class="col s12 m8 l9">
