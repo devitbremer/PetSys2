@@ -24,7 +24,7 @@
 	            </div>
 	        </div>
 	    </li>
-	    <li class="bold"><a href="#" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Início</a>
+	    <li class="bold"><a href="index.php" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Início</a>
 	    </li>
 	    <li class="no-padding">
 	        <ul class="collapsible collapsible-accordion">
