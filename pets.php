@@ -123,17 +123,18 @@
                         <form action="pets.php?idpet=<?php echo $linha['id_pet'];?>" method="POST" class="col s12">
                           <div class="card-panel z-depth-2">
                           <div class="row">
+                            <input type="hidden" name="id_pet" value="<?php echo $linha['id_pet'] ?>">
+
                             <div class="input-field col s6">
                               <input value="<?php echo $linha['nome_pet']; ?>" name="pet_nome" id="pet_nome" type="text" >
-                              <input type="hidden" name="id_pet" value="<?php echo $linha['id_pet'] ?>">
-                              <label <?php if(isset($linha['nome_pet']))echo 'class="active"' ?> for="nome_pet">Nome</label>
+                              <label <?php if(isset($linha['nome_pet']))echo 'class="active"' ?> for="pet_nome">Nome</label>
                             </div>
                             <div class="input-field col s3">
                               <input value="<?php echo $linha['nascimento']; ?>" name="nascimento" type="date" class="datepicker" >
                               <label <?php if(isset($linha['nascimento']))echo 'class="active"' ?> for="nascimento">Nasc.</label>
                             </div>
                             <div class="input-field col s3">
-                              <select name="sexo">
+                              <select class="initialized" name="sexo">
                                 <option value="" disabled selected>Escolha o genero</option>
                                 <option <?php echo selected('Macho',$linha['sexo']); ?> value="Macho">Macho</option>
                                 <option <?php echo selected('Fêmea',$linha['sexo']);?>value="Fêmea">Fêmea</option>
