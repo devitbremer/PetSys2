@@ -133,7 +133,7 @@
                                                         on c.id_contato=ct.id_contato
                                                         INNER JOIN tel_tipo as tp
                                                         on tp.id_tipo=ct.tipo
-                                                        WHERE c.nome like '%aline%'"; 
+                                                        WHERE c.nome like '%eneias%'"; 
 
                                       //Pesquisar Pet
                                       if(isset($_POST['Pesquisar'])){

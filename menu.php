@@ -46,7 +46,7 @@
 	        </ul>
 	    </li>
 	    <li class="bold"><a href="venda.php" class="waves-effect waves-cyan"><i class="mdi-action-receipt"></i> Vendas</a></li>
-	   	<li class="bold"><a href="#" class="waves-effect waves-cyan"><i class="mdi-action-payment"></i> Contas a Pagar</a></li>
+	   	<li class="bold"><a href="contas_a_pagar.php" class="waves-effect waves-cyan"><i class="mdi-action-payment"></i> Contas a Pagar</a></li>
 	    <li class="li-hover"><div class="divider"></div></li>
         <li class="li-hover"><p class="ultra-small margin more-text">RELATÓRIOS</p></li>
         <li class="bold"><a href="relatorio_clientes.php" class="waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Clientes</a></li>
