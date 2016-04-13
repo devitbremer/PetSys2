@@ -43,6 +43,18 @@
             <!-- //////////////////////////////////////////////////////////////////////////// -->
 
             <!-- INICIO DO CONTEUDO -->
+            <section id="content">
+              <!--start container-->
+                <div class="container">
+                <!--Formulário-->          
+                    <div class="row">
+                      <div class="col s12 m12 l12">
+                          <div class = "card-panel" style="height: 900px">
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </section>
             
             <!-- FIM DO CONTEUDO -->
 
